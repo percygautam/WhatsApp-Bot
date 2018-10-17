@@ -1,0 +1,71 @@
+ 
+# Reference groupdb.py
+#: import main groupdb
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+ 
+GroupDB:
+ 
+<GroupDB>:
+    orientation: "vertical"
+    first_name_text_input: first_name
+    group_name_text_input: group_name
+    group_list: group_list_view
+    
+
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+ 
+        Label:
+            text: "Group Name"
+        TextInput:
+            id: group_name
+            focus : True
+            multiline: False
+            on_text_validate: first_name.focus = True
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+ 
+        Label:
+            text: "Contact Name"
+        TextInput:
+            id: first_name
+            focus : True
+            multiline: False
+            on_text_validate: enter.trigger_action(duration=0.1)
+            
+                                 
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            id: enter
+            text: "Enter"
+            size_hint_x: 15
+            on_press: root.submit_member()
+            on_release: first_name.focus=True
+
+        Button:
+            text: "Delete"
+            size_hint_x: 15
+            on_press: root.delete_member()
+            on_release: first_name.focus=True
+        Button:
+            text: "Submit"
+            size_hint_x: 15
+            on_press: root.Exit_app()
+            
+
+    # Define starting data and point to the ListItemButton
+    # in the Python code
+    ListView:
+        id: group_list_view
+        adapter:
+            ListAdapter(data=[], cls=main.GroupListButton)
+    
